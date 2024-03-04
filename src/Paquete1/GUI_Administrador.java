@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class GUI_Administrador extends JFrame {
 
@@ -41,6 +42,7 @@ public class GUI_Administrador extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Gui de Administrador");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(100, 11, 224, 25);
 		contentPane.add(lblNewLabel);
 	}

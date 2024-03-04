@@ -8,13 +8,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JToggleButton;
 
 public class GUI_Clientes extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField Text1;
-
+	private int Q;
 	/**
 	 * Launch the application.
 	 */
@@ -55,5 +56,9 @@ public class GUI_Clientes extends JFrame {
 		JButton Boton1 = new JButton("Nuevo Boton");
 		Boton1.setBounds(58, 40, 116, 23);
 		contentPane.add(Boton1);
+		
+		JButton Boton2 = new JButton("UU");
+		Boton2.setBounds(85, 76, 89, 23);
+		contentPane.add(Boton2);
 	}
 }

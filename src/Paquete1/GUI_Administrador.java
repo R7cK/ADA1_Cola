@@ -5,6 +5,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GUI_Administrador extends JFrame {
 
@@ -37,6 +43,20 @@ public class GUI_Administrador extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Gui de Administrador");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(100, 11, 224, 25);
+		contentPane.add(lblNewLabel);
+		
+		JButton btnNewButton = new JButton("Imprimir");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			JOptionPane.showMessageDialog(null, "Prueba de impresion");
+			}
+		});
+		btnNewButton.setBounds(130, 73, 131, 34);
+		contentPane.add(btnNewButton);
 	}
-
 }

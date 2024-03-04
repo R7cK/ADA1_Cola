@@ -5,5 +5,5 @@ public class Base_Datos {
 	String Nombre;
 	String DatosBancarios;
 	String Numero;
-	
+	String A;
 }

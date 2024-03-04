@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
 
 public class GUI_Administrador extends JFrame {
 
@@ -37,6 +38,10 @@ public class GUI_Administrador extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Gui de Administrador");
+		lblNewLabel.setBounds(100, 11, 224, 25);
+		contentPane.add(lblNewLabel);
 	}
-
 }

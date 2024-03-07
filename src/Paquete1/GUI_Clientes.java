@@ -59,7 +59,7 @@ public class GUI_Clientes extends JFrame {
 		contentPane.add(btnPreordena);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(671, 306, 169, 43);
+		btnCancelar.setBounds(671, 360, 169, 43);
 		contentPane.add(btnCancelar);
 		
 		JButton btnComprar = new JButton("Conseguir");
@@ -73,5 +73,9 @@ public class GUI_Clientes extends JFrame {
 		lbl_Logo = new JLabel("Logo del juego");
 		lbl_Logo.setBounds(644, 40, 207, 145);
 		contentPane.add(lbl_Logo);
+		
+		JButton btn_Carrito = new JButton("A\u00F1adir al carrito");
+		btn_Carrito.setBounds(671, 306, 169, 43);
+		contentPane.add(btn_Carrito);
 	}
 }

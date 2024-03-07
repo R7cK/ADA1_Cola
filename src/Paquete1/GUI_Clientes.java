@@ -12,6 +12,9 @@ import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -19,8 +22,9 @@ public class GUI_Clientes extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField Text1;
-	private int Q;
+	private JLabel lbl_Logo;
+	private int i = 0;
+	Datos_Juego Juego1 = new Datos_Juego();
 	/**
 	 * Launch the application.
 	 */
@@ -41,56 +45,92 @@ public class GUI_Clientes extends JFrame {
 	 * Create the frame.
 	 */
 	public GUI_Clientes() {
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 877, 626);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+
+		JLabel lbl_GameImg = new JLabel("");
+		lbl_GameImg.setIcon(new ImageIcon("Icons//IMG1.jpg"));
+		lbl_GameImg.setBounds(20, 79, 590, 308);
+		contentPane.add(lbl_GameImg);		
 		
-		JLabel A1 = new JLabel("Imagenes");
-		A1.setHorizontalAlignment(SwingConstants.CENTER);
-		A1.setBounds(10, 11, 150, 130);
-		contentPane.add(A1);
+		JLabel lbl_ProdDisp = new JLabel("Numero de copias disponibles");
+		lbl_ProdDisp.setBounds(20, 386, 275, 54);
+		contentPane.add(lbl_ProdDisp);
 		
-		Text1 = new JTextField();
-		Text1.setBounds(214, 77, 141, 20);
-		contentPane.add(Text1);
-		Text1.setColumns(10);
-		
-		// Los botones de Anterior y Siguiente funcionaran solamente para intercambiar imagenes
-		
-		JButton Siguiente = new JButton("<<");
-		Siguiente.addActionListener(new ActionListener() {
+		JButton btnPreordena = new JButton("Preordenar");
+		btnPreordena.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			
 			}
 		});
-		Siguiente.setBackground(new Color(222, 184, 135));
-		Siguiente.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		Siguiente.setBounds(10, 150, 70, 23);
-		contentPane.add(Siguiente);
+		btnPreordena.setBounds(20, 451, 275, 43);
+		contentPane.add(btnPreordena);
 		
-		JButton Boton2 = new JButton("UU");
-		Boton2.setBounds(71, 194, 89, 23);
-		contentPane.add(Boton2);
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(671, 360, 169, 43);
+		contentPane.add(btnCancelar);
 		
-		JLabel A2 = new JLabel("\"Nombre de Juego\"");
-		A2.setFont(new Font("Times New Roman", Font.BOLD, 24));
-		A2.setHorizontalAlignment(SwingConstants.CENTER);
-		A2.setBounds(166, 11, 235, 40);
-		contentPane.add(A2);
+		JButton btnComprar = new JButton("Conseguir");
+		btnComprar.setBounds(671, 252, 169, 43);
+		contentPane.add(btnComprar);
 		
-		JButton Anterior = new JButton(">>");
-		Anterior.setBackground(new Color(222, 184, 135));
-		Anterior.setForeground(Color.BLACK);
-		Anterior.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		Anterior.setBounds(90, 150, 70, 23);
-		contentPane.add(Anterior);
+		JLabel lbl_GameName = new JLabel("Grand Theft Auto VI");
+		lbl_GameName.setFont(new Font("Franklin Gothic Book", Font.BOLD, 40));
+		lbl_GameName.setBounds(20, 11, 422, 57);
+		contentPane.add(lbl_GameName);
 		
-		JLabel A3 = new JLabel("FONDO");
-		A3.setHorizontalAlignment(SwingConstants.CENTER);
-		A3.setBounds(0, 0, 434, 261);
-		contentPane.add(A3);
+		lbl_Logo = new JLabel("");
+		lbl_Logo.setIcon(new ImageIcon("C:\\Users\\ferna\\Desktop\\4to Semestre\\POO2\\Imagenes TrabajoGIT\\LogoJuego.png"));
+		lbl_Logo.setBounds(644, 40, 207, 145);
+		contentPane.add(lbl_Logo);
+		
+		JButton btn_Carrito = new JButton("A\u00F1adir al carrito");
+		btn_Carrito.setBounds(671, 306, 169, 43);
+		contentPane.add(btn_Carrito);
+		
+		JButton btn_Anterior = new JButton("<<");
+		btn_Anterior.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			if (i==5) {lbl_GameImg.setIcon(new ImageIcon("Icons//IMG2.jpg"));} 
+			else if (i==4){lbl_GameImg.setIcon(new ImageIcon("Icons//IMG3.jpg"));}
+			else if (i==3){lbl_GameImg.setIcon(new ImageIcon("Icons//IMG4.png"));}
+			else if (i==2){lbl_GameImg.setIcon(new ImageIcon("Icons//IMG5.jpg"));}
+			else if (i==0){lbl_GameImg.setIcon(new ImageIcon("Icons//IMG1.jpg"));}
+			else if (i==1){lbl_GameImg.setIcon(new ImageIcon("Icons//IMG2.jpg"));}
+			i--;	
+			}
+		});
+		btn_Anterior.setBackground(new Color(255, 0, 255));
+		btn_Anterior.setForeground(new Color(0, 0, 0));
+		btn_Anterior.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		btn_Anterior.setBounds(478, 398, 61, 23);
+		contentPane.add(btn_Anterior);
+		
+		JButton btn_Siguiente = new JButton(">>");
+		btn_Siguiente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			if (i==0) {lbl_GameImg.setIcon(new ImageIcon("Icons//IMG2.jpg"));} 
+			else if (i==1){lbl_GameImg.setIcon(new ImageIcon("Icons//IMG3.jpg"));}
+			else if (i==2){lbl_GameImg.setIcon(new ImageIcon("Icons//IMG4.png"));}
+			else if (i==3){lbl_GameImg.setIcon(new ImageIcon("Icons//IMG5.jpg"));}
+			else if (i==4){lbl_GameImg.setIcon(new ImageIcon("Icons//IMG1.jpg"));}
+			else if (i==5){lbl_GameImg.setIcon(new ImageIcon("Icons//IMG2.jpg")); 			
+			i = 0;}
+			i++;
+			}
+		});
+		btn_Siguiente.setBackground(new Color(255, 0, 255));
+		btn_Siguiente.setForeground(new Color(0, 0, 0));
+		btn_Siguiente.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		btn_Siguiente.setBounds(549, 398, 61, 23);
+		contentPane.add(btn_Siguiente);
+		
 	}
 }

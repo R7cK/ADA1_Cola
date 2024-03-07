@@ -14,8 +14,8 @@ public class GUI_Clientes extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField Text1;
 	private int Q;
+	private JLabel lbl_Logo;
 	/**
 	 * Launch the application.
 	 */
@@ -39,28 +39,39 @@ public class GUI_Clientes extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 877, 626);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel A1 = new JLabel("PRUEBA GIT");
-		A1.setBounds(10, 11, 116, 14);
-		contentPane.add(A1);
+		JLabel lbl_GameImg = new JLabel("Imagen Juego");
+		lbl_GameImg.setBounds(20, 79, 590, 308);
+		contentPane.add(lbl_GameImg);
 		
-		Text1 = new JTextField();
-		Text1.setBounds(136, 8, 141, 20);
-		contentPane.add(Text1);
-		Text1.setColumns(10);
+		JLabel lbl_ProdDisp = new JLabel("Numero de copias disponibles");
+		lbl_ProdDisp.setBounds(20, 386, 275, 54);
+		contentPane.add(lbl_ProdDisp);
 		
-		JButton Boton1 = new JButton("Nuevo Boton");
-		Boton1.setBounds(58, 40, 116, 23);
-		contentPane.add(Boton1);
+		JButton btnPreordena = new JButton("Preordenar");
+		btnPreordena.setBounds(20, 451, 275, 43);
+		contentPane.add(btnPreordena);
 		
-		JButton Boton2 = new JButton("UU");
-		Boton2.setBounds(85, 76, 89, 23);
-		contentPane.add(Boton2);
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(671, 306, 169, 43);
+		contentPane.add(btnCancelar);
+		
+		JButton btnComprar = new JButton("Conseguir");
+		btnComprar.setBounds(671, 252, 169, 43);
+		contentPane.add(btnComprar);
+		
+		JLabel lbl_GameName = new JLabel("Nombre del juego");
+		lbl_GameName.setBounds(20, 11, 422, 43);
+		contentPane.add(lbl_GameName);
+		
+		lbl_Logo = new JLabel("Logo del juego");
+		lbl_Logo.setBounds(644, 40, 207, 145);
+		contentPane.add(lbl_Logo);
 	}
 }

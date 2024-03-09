@@ -18,7 +18,6 @@ public class GUI_Clientes extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JLabel lbl_Logo;
-	int ticket = 1;
 	private Queue<Datos_Juego> cola = new LinkedList<>();
 	int disponible = 100;
 	
@@ -78,19 +77,6 @@ public class GUI_Clientes extends JFrame {
 		JButton btnComprar = new JButton("Apartar");
 		btnComprar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int ticket1 = ticket;
-				String Nombre = JOptionPane.showInputDialog("¿cual es el nombre?");
-				int Cantidad = Integer.parseInt(JOptionPane.showInputDialog("¿cuantos vas a comprar"));
-				if(Cantidad>disponible) {
-					JOptionPane.showMessageDialog(null, "no hay suficiente");
-				}else if(Cantidad<disponible) {
-					disponible = disponible-Cantidad;
-				}
-				
-				Datos_Juego juego = new Datos_Juego(Nombre, Cantidad, ticket1);
-				cola.offer(juego);
-				admin.actualizarTabla(cola);
-				ticket++;
 			}
 		});
 		btnComprar.setBounds(671, 252, 169, 43);
@@ -106,10 +92,7 @@ public class GUI_Clientes extends JFrame {
 		
 		JButton GuiAdmin = new JButton("Gui Admin");
 		GuiAdmin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				admin.setVisible(true);
-				setVisible(false);
-				
+			public void actionPerformed(ActionEvent e) {	
 			}
 		});
 		GuiAdmin.setBounds(671, 306, 169, 43);

@@ -13,9 +13,9 @@ import java.util.Queue;
 public class GUI_Administrador extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private DefaultTableModel tablaApartados = new DefaultTableModel();
     private JTable tabla;
-    private int precio = 100;
+    private DefaultTableModel Apartados = new DefaultTableModel();
+    
 
     public GUI_Administrador(GUI_Clientes clientesGUI) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,50 +24,17 @@ public class GUI_Administrador extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-
-        tabla = new JTable(tablaApartados) {
+        
+        tabla = new JTable(Apartados) {
+        	//Funcion para evitar que las celdas se editen mientras se ejeucta el programa
             public boolean isCellEditable(int fila, int column){  
                 return false;  
             }
         };
-        tabla.setFont(new Font("Inter", Font.PLAIN, 14));
-        tabla.setBackground(new Color(192, 192, 192));
+        // Se agregan apartados a la tabla
+        Apartados.addRow(new Object[]{"Ticket", "Nombre", "Cantidad", "Total a pagar ($)"});
 
-        tablaApartados.addColumn("Ticket");
-        tablaApartados.addColumn("Nombre");
-        tablaApartados.addColumn("Cantidad");
-        tablaApartados.addColumn("Total a pagar ($)");
-
-        // Agregamos una fila inicial de encabezados con valores predeterminados
-        tablaApartados.addRow(new Object[]{"Ticket", "Nombre", "Cantidad", "Total a pagar ($)"});
-
-        tabla.setBounds(27, 75, 483, 492);
+        tabla.setBounds(58, 33, 347, 510);
         contentPane.add(tabla);
-
-        // Botón para mostrar la GUI de Clientes
-        JButton btnMostrarClientes = new JButton("Mostrar Clientes");
-        btnMostrarClientes.addActionListener(e -> {
-        	setVisible(false);
-        	clientesGUI.setVisible(true);
-        });
-        btnMostrarClientes.setBounds(600, 451, 250, 43);
-        contentPane.add(btnMostrarClientes);
     }
-
-    // Método para actualizar la tabla con los datos de la cola
-    public void actualizarTabla(Queue<Datos_Juego> cola) {
-        // Limpiamos la tabla antes de actualizarla
-       
-
-        // Iteramos sobre la cola y agregamos los datos
-        for (Datos_Juego juego : cola) {
-            int totalAPagar = juego.getcantidad() * precio; // Calcular el total a pagar
-            tablaApartados.addRow(new Object[]{
-                juego.getTicket(),
-                juego.getnombre(),
-                juego.getcantidad(),
-                totalAPagar
-            });
-        }
     }
-}

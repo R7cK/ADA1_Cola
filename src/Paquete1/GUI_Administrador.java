@@ -15,7 +15,7 @@ public class GUI_Administrador extends JFrame {
     private JPanel contentPane;
     private JTable tabla;
     private DefaultTableModel Apartados = new DefaultTableModel();
-    
+    int precio = 100;
 
     public GUI_Administrador(GUI_Clientes clientesGUI) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,5 +36,21 @@ public class GUI_Administrador extends JFrame {
 
         tabla.setBounds(58, 33, 347, 510);
         contentPane.add(tabla);
+    }
+    //Metodo para hacer conexxión en la tabla:
+   	 public void actualizarTabla(Queue<Datos_Juego> cola) {
+           // Limpiamos la tabla antes de actualizarla
+           Apartados.setRowCount(1);
+
+           // Iteramos sobre la cola y agregamos los datos
+           for (Datos_Juego juego : cola) {
+               int totalAPagar = juego.getcantidad() * precio; // Calcular el total a pagar
+               Apartados.addRow(new Object[]{
+                   juego.getTicket(),
+                   juego.getnombre(),
+                   juego.getcantidad(),
+                   totalAPagar
+               });
+           }
     }
     }

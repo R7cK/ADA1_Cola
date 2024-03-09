@@ -56,6 +56,8 @@ public class GUI_Clientes extends JFrame {
 	 */
 	public GUI_Clientes() {
 		
+		GUI_Administrador Administrador = new GUI_Administrador(GUI_Clientes.this);
+		Administrador.setVisible(false);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 877, 626);
@@ -185,8 +187,8 @@ public class GUI_Clientes extends JFrame {
 		botonGUI_Administrador.setForeground(new Color(0, 0, 0));
 		botonGUI_Administrador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			GUI_Administrador Window = new GUI_Administrador();
-			Window.setVisible(true);
+			Administrador.setVisible(true);
+			setVisible(false);
 			}
 		});
 		botonGUI_Administrador.setFont(new Font("Tahoma", Font.ITALIC, 13));
@@ -219,4 +221,5 @@ public class GUI_Clientes extends JFrame {
 		
 		
 	}
+
 }

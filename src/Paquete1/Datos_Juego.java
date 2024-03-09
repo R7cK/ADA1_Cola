@@ -36,5 +36,4 @@ public class Datos_Juego {
 	public void setTicket(int ticket) {
 		this.ticket = ticket;
 	}
-	private int precio;
 }

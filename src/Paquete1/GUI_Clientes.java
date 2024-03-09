@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JToggleButton;
@@ -60,14 +61,17 @@ public class GUI_Clientes extends JFrame {
 		lbl_GameImg.setBounds(20, 79, 590, 308);
 		contentPane.add(lbl_GameImg);		
 		
-		JLabel lbl_ProdDisp = new JLabel("Numero de copias disponibles");
+		JLabel lbl_ProdDisp = new JLabel("Numero de copias disponibles:");
 		lbl_ProdDisp.setBounds(20, 386, 275, 54);
 		contentPane.add(lbl_ProdDisp);
 		
 		JButton btnPreordena = new JButton("Preordenar");
 		btnPreordena.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+			String Nombre = JOptionPane.showInputDialog("Ingresa el nombre");
+			double Precio = Double.parseDouble(JOptionPane.showInputDialog("Ingresa el precio"));
+			int CantidadDisponible = Integer.parseInt(JOptionPane.showInputDialog("Ingresa las copias disponibles"));
+			Datos_Juego Juego1 = new Datos_Juego(Nombre,CantidadDisponible,Precio);			
 			}
 		});
 		btnPreordena.setBounds(20, 451, 275, 43);
@@ -82,13 +86,13 @@ public class GUI_Clientes extends JFrame {
 		contentPane.add(btnComprar);
 		
 		JLabel lbl_GameName = new JLabel("Grand Theft Auto VI");
-		lbl_GameName.setFont(new Font("Franklin Gothic Book", Font.BOLD, 40));
+		lbl_GameName.setFont(new Font("Franklin Gothic Book", Font.BOLD, 46));
 		lbl_GameName.setBounds(20, 11, 422, 57);
 		contentPane.add(lbl_GameName);
 		
 		lbl_Logo = new JLabel("");
 		lbl_Logo.setIcon(new ImageIcon("C:\\Users\\ferna\\Desktop\\4to Semestre\\POO2\\Imagenes TrabajoGIT\\LogoJuego.png"));
-		lbl_Logo.setBounds(644, 40, 207, 145);
+		lbl_Logo.setBounds(633, 79, 207, 145);
 		contentPane.add(lbl_Logo);
 		
 		JButton btn_Carrito = new JButton("A\u00F1adir al carrito");

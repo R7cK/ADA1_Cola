@@ -1,5 +1,4 @@
 package Paquete1;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -28,16 +27,15 @@ public class GUI_Administrador extends JFrame {
     private JLabel lblVendido;
     private int disponible; 
     private int vendido; 
-
+    
     public GUI_Administrador(GUI_Clientes clientesGUI) {
         this.clientesGUI = clientesGUI; // Asignar la referencia a la interfaz de clientes
-
+        
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 877, 626);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
-
         tabla = new JTable(tablaApartados) { // Crear una tabla para mostrar los productos apartados
             public boolean isCellEditable(int fila, int column){ // Deshabilitar la edición de celdas
                 return false; 
@@ -46,7 +44,6 @@ public class GUI_Administrador extends JFrame {
         tabla.setBounds(27, 75, 483, 492); 
         tabla.setFont(new Font("Inter", Font.PLAIN, 14));
         tabla.setBackground(new Color(192, 192, 192)); 
-
         tablaApartados = new DefaultTableModel(); // Crear un nuevo modelo de tabla
         tabla.setModel(tablaApartados); // Asignar el modelo de tabla a la tabla
         tablaApartados.addColumn("Ticket"); // Agregar columnas a la tabla
@@ -66,7 +63,7 @@ public class GUI_Administrador extends JFrame {
             }
         });
         contentPane.add(btnMostrarClientes); 
-        
+
         btnAadirCantidades = new JButton("Añadir Cantidades"); 
         btnAadirCantidades.setBounds(569, 387, 250, 43); 
         btnAadirCantidades.addActionListener(new ActionListener() { 
@@ -90,7 +87,7 @@ public class GUI_Administrador extends JFrame {
         lblVendido = new JLabel("Cantidad Vendida: " + vendido); 
         lblVendido.setBounds(672, 188, 150, 30); 
         contentPane.add(lblVendido); 
-        
+
         JButton btnAtender = new JButton("Atender");
         btnAtender.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -101,18 +98,21 @@ public class GUI_Administrador extends JFrame {
         contentPane.add(btnAtender);
     }
     public void actualizarTabla(Queue<Datos_Juego> cola) {
-        tablaApartados.setRowCount(1); 
-        for (Datos_Juego juego : cola) { // Iterar sobre la cola de productos apartados
-            int totalAPagar = juego.getcantidad() * precio; // Calcular el total a pagar por cada producto
-            tablaApartados.addRow(new Object[]{ // Agregar una nueva fila a la tabla con los datos del producto
-                juego.getTicket(),
+        // Limpiamos la tabla antes de actualizarla
+        tablaApartados.setRowCount(1);
+
+        // Iteramos sobre la cola y agregamos los datos
+        for (Datos_Juego juego : cola) {
+            int totalAPagar = juego.getcantidad() * precio; // Calcular el total a pagar
+            tablaApartados.addRow(new Object[]{
+                juego.getticket(),
                 juego.getnombre(),
                 juego.getcantidad(),
                 totalAPagar
             });
         }
+ 
     }
-
    //Metodo para actualizar los labels de cantidad vendida y disponible
     public void actualizarLabels(int disponible, int vendido) {
         this.disponible = disponible; // Actualizar la cantidad disponible
@@ -120,7 +120,6 @@ public class GUI_Administrador extends JFrame {
         lblDisponible.setText("Cantidad Disponible: " + disponible); 
         lblVendido.setText("Cantidad Vendida: " + vendido); 
     }
-
     
      //Método para actualizar la cantidad disponible de productos
     public void actualizarDisponible(int cantidadAñadida) {

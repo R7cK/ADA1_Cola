@@ -18,7 +18,7 @@ public class GUI_Clientes extends JFrame {
     private JPanel contentPane; 
     private GUI_Administrador admin; 
     private int ticket = 1; //contador para el numero de tickets
-    private Queue<Datos_Juego> cola = new LinkedList<>(); // Cola de productos apartados
+    public Queue<Datos_Juego> cola = new LinkedList<>(); // Cola de productos apartados
     private int disponible = 100; // Cantidad disponible de productos
     private int vendido = 0; // Cantidad vendida de productos
 

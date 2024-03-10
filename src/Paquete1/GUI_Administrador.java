@@ -23,6 +23,7 @@ public class GUI_Administrador extends JFrame {
     private int precio = 100; // Precio unitario de los productos
     private GUI_Clientes clientesGUI; // Referencia a la interfaz de clientes
     private JButton btnAadirCantidades;
+    private JButton btnAtender;
     private JLabel lblDisponible; 
     private JLabel lblVendido;
     private int disponible; 
@@ -57,7 +58,7 @@ public class GUI_Administrador extends JFrame {
         contentPane.add(tabla); 
 
         JButton btnMostrarClientes = new JButton("Mostrar Clientes");
-        btnMostrarClientes.setBounds(600, 451, 250, 43); 
+        btnMostrarClientes.setBounds(569, 444, 250, 43); 
         btnMostrarClientes.addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) {
                 setVisible(false); // Ocultar la interfaz de administrador al hacer clic en el botón
@@ -67,7 +68,7 @@ public class GUI_Administrador extends JFrame {
         contentPane.add(btnMostrarClientes); 
         
         btnAadirCantidades = new JButton("Añadir Cantidades"); 
-        btnAadirCantidades.setBounds(588, 387, 250, 43); 
+        btnAadirCantidades.setBounds(569, 387, 250, 43); 
         btnAadirCantidades.addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) {
                 int AddCant = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántas cantidades deseas añadir?")); // Solicitar la cantidad a añadir
@@ -89,6 +90,15 @@ public class GUI_Administrador extends JFrame {
         lblVendido = new JLabel("Cantidad Vendida: " + vendido); 
         lblVendido.setBounds(672, 188, 150, 30); 
         contentPane.add(lblVendido); 
+        
+        JButton btnAtender = new JButton("Atender");
+        btnAtender.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		  atenderPedido();
+        	}
+        });
+        btnAtender.setBounds(569, 330, 250, 43);
+        contentPane.add(btnAtender);
     }
     public void actualizarTabla(Queue<Datos_Juego> cola) {
         tablaApartados.setRowCount(1); 
@@ -116,5 +126,22 @@ public class GUI_Administrador extends JFrame {
     public void actualizarDisponible(int cantidadAñadida) {
         disponible += cantidadAñadida; // Añadir la cantidad especificada
         lblDisponible.setText("Cantidad Disponible: " + disponible); // Actualizar el texto del label de cantidad disponible
+    }
+    // Método para atender el siguiente pedido
+    private void atenderPedido() {
+        // Verificar si hay pedidos en la cola
+        if (!clientesGUI.cola.isEmpty()) {
+            // Obtener el primer pedido de la cola
+            Datos_Juego pedido = clientesGUI.cola.poll();
+            // Actualizar la tabla con los pedidos restantes
+            actualizarTabla(clientesGUI.cola);
+            // Actualizar las cantidades
+            vendido += pedido.getcantidad();
+            disponible -= pedido.getcantidad();
+            // Actualizar los labels
+            actualizarLabels(disponible, vendido);
+        } else {
+            JOptionPane.showMessageDialog(null, "No hay pedidos pendientes por atender.");
+        }
     }
 }

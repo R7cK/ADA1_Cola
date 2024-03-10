@@ -86,7 +86,6 @@ public class GUI_Clientes extends JFrame {
                      ticket++;
                      vendido += Cantidad;
                      disponible -= Cantidad;
-                     actualizarLabels(disponible, vendido);
                      JOptionPane.showMessageDialog(null, "Su producto ha sido apartado");
                  }
             }
@@ -95,6 +94,12 @@ public class GUI_Clientes extends JFrame {
         contentPane.add(btnPreordena);
 
         JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		cola.remove(juego);
+        		admin.actualizarTabla(cola);
+        	}
+        });
         btnCancelar.setBackground(new Color(250, 128, 114));
         btnCancelar.setForeground(new Color(0, 0, 0));
         btnCancelar.setFont(new Font("Times New Roman", Font.BOLD, 18));
@@ -150,49 +155,26 @@ public class GUI_Clientes extends JFrame {
         btn_Carrito.setBounds(633, 306, 207, 43);
         contentPane.add(btn_Carrito);
 
-        JButton btn_Anterior = new JButton("<<");
-        btn_Anterior.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (i == 5) {
-                    lbl_GameImg.setIcon(new ImageIcon("Icons//IMG2.jpg"));
-                } else if (i == 4) {
-                    lbl_GameImg.setIcon(new ImageIcon("Icons//IMG3.jpg"));
-                } else if (i == 3) {
-                    lbl_GameImg.setIcon(new ImageIcon("Icons//IMG4.png"));
-                } else if (i == 2) {
-                    lbl_GameImg.setIcon(new ImageIcon("Icons//IMG5.jpg"));
-                } else if (i == 0) {
-                    lbl_GameImg.setIcon(new ImageIcon("Icons//IMG1.jpg"));
-                } else if (i == 1) {
-                    lbl_GameImg.setIcon(new ImageIcon("Icons//IMG2.jpg"));
-                }
-                i--;
-            }
-        });
-        btn_Anterior.setBackground(new Color(255, 0, 255));
-        btn_Anterior.setForeground(new Color(0, 0, 0));
-        btn_Anterior.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-        btn_Anterior.setBounds(478, 398, 61, 23);
-        contentPane.add(btn_Anterior);
-
         JButton btn_Siguiente = new JButton(">>");
         btn_Siguiente.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {       	
+            	 
                 if (i == 0) {
+                	i++;
                     lbl_GameImg.setIcon(new ImageIcon("Icons//IMG2.jpg"));
                 } else if (i == 1) {
+                	i++;
                     lbl_GameImg.setIcon(new ImageIcon("Icons//IMG3.jpg"));
                 } else if (i == 2) {
+                	i++;
                     lbl_GameImg.setIcon(new ImageIcon("Icons//IMG4.png"));
                 } else if (i == 3) {
+                	i++;
                     lbl_GameImg.setIcon(new ImageIcon("Icons//IMG5.jpg"));
                 } else if (i == 4) {
                     lbl_GameImg.setIcon(new ImageIcon("Icons//IMG1.jpg"));
-                } else if (i == 5) {
-                    lbl_GameImg.setIcon(new ImageIcon("Icons//IMG2.jpg"));
                     i = 0;
-                }
-                i++;
+                } 
             }
         });
         btn_Siguiente.setBackground(new Color(255, 0, 255));
@@ -237,13 +219,8 @@ public class GUI_Clientes extends JFrame {
         lblFondoGUI.setHorizontalAlignment(SwingConstants.CENTER);
         lblFondoGUI.setBounds(0, 0, 861, 587);
         contentPane.add(lblFondoGUI);
-
+        
     }
-
-    public void actualizarLabels(int disponible, int vendido) {
-        admin.actualizarLabels(disponible, vendido);
-    }
-
     public void actualizarcantidad(int cantidad) {
         disponible += cantidad;
     }

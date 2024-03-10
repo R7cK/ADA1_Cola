@@ -13,6 +13,9 @@ public class Datos_Juego {
 	}
 	Datos_Juego(){}
 	
+	public Datos_Juego(int ticket, String nombre2, int cantidad) {
+		// TODO Auto-generated constructor stub
+	}
 	public String getnombre() {
 		return nombre;
 	}
@@ -35,6 +38,14 @@ public class Datos_Juego {
 	
 	public void setprecio(double precio) {
 		this.precio = precio;
+	}
+	public String getcantidad() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public int getticket() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

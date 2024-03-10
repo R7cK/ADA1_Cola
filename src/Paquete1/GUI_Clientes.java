@@ -32,8 +32,11 @@ public class GUI_Clientes extends JFrame {
 	private JLabel lbl_Logo;
 	private int i = 0;
 	private int ticket = 1;
-    Datos_Juego Juego2 = new Datos_Juego();
-    Queue<Datos_Juego> Cola = new LinkedList<Datos_Juego>();
+	private int disponible = 100;
+	private int vendido;
+	private GUI_Administrador admin;
+    Datos_Juego juego = new Datos_Juego();
+    Queue<Datos_Juego> cola = new LinkedList<Datos_Juego>();
 
 	/**
 	 * Launch the application.
@@ -56,7 +59,7 @@ public class GUI_Clientes extends JFrame {
 	 */
 	public GUI_Clientes() {
 		
-		GUI_Administrador Administrador = new GUI_Administrador(GUI_Clientes.this);
+		GUI_Administrador Administrador = new GUI_Administrador(this);
 		Administrador.setVisible(false);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -84,12 +87,22 @@ public class GUI_Clientes extends JFrame {
 		btnPreordena.setBackground(new Color(255, 255, 0));
 		btnPreordena.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			int Ticket = ticket++;	
-			String Nombre = JOptionPane.showInputDialog("Ingresa el nombre del responsable");
-			int Cantidad = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántas copias quieres apartar?"));	
-			Juego2 = new Datos_Juego(Ticket,Nombre,Cantidad);
-			Cola.offer(Juego2);
-			JOptionPane.showMessageDialog(null, "Su producto ha sido apartado");
+				int Ticket = ticket;
+                String Nombre = JOptionPane.showInputDialog("Ingresa el nombre del responsable");
+                int Cantidad = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántas copias quieres apartar?"));
+
+                if (Cantidad > disponible) {
+                    JOptionPane.showMessageDialog(null, "No hay suficientes unidades disponibles.");
+                } else if(Cantidad <= disponible){
+                    juego = new Datos_Juego(Ticket, Nombre, Cantidad);
+                    cola.offer(juego);
+                    
+                    ticket++;
+                    vendido += Cantidad;
+                    disponible -= Cantidad;
+
+                    JOptionPane.showMessageDialog(null, "Su producto ha sido apartado");
+                }
 			}
 		});
 		btnPreordena.setBounds(20, 440, 275, 43);
@@ -107,20 +120,24 @@ public class GUI_Clientes extends JFrame {
 		btnConseguir.setForeground(new Color(0, 0, 0));
 		btnConseguir.setFont(new Font("Times New Roman", Font.BOLD, 18));
 		btnConseguir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			Cola.poll();	
-			String Num = JOptionPane.showInputDialog(null, "Ingresa tu ticket");
-			int Num2 = Integer.parseInt(Num);
-			StringBuilder sb = new StringBuilder();	
-	        sb.append(Juego2).append("\n");
-	        if (Juego2 != null) {
-			JOptionPane.showMessageDialog(null, "Hola " + ((Datos_Juego) Cola).getnombre() + " el producto ha sido Apartado." + "\n" +
-	        "La información de su producto es la siguiente:" + "\n" +
-	        "Ticket de Compra: "+ Juego2.getticket() 
-	        + "\n" + "Nombre del propietario: "+ Juego2.getnombre() 
-	        + "\n" + "Cantidad de Copias Apartadas: " + Juego2.getcantidad());
-	        }
-			}
+		public void actionPerformed(ActionEvent e) {
+		
+		int Buscar = Integer.parseInt(JOptionPane.showInputDialog("Dame el numero de ticker"));
+        Datos_Juego resultado = buscarTicket(cola, Buscar);
+        if (resultado != null) {
+         JOptionPane.showMessageDialog(null, "Ticket encontrado: \nNombre: " + resultado.getnombre() + "\nCantidad: " + resultado.getcantidad());
+         } else {
+          JOptionPane.showMessageDialog(null, "Ticket no encontrado.");
+           }
+         }
+           public static Datos_Juego buscarTicket(Queue<Datos_Juego> cola, int Buscar) {
+                for (Datos_Juego juego : cola) {
+                    if (juego.getticket() == Buscar) {
+                        return juego;
+                    }
+                }
+                return null;			
+             }
 		});
 		btnConseguir.setBounds(633, 252, 207, 43);
 		contentPane.add(btnConseguir);
@@ -139,7 +156,7 @@ public class GUI_Clientes extends JFrame {
 		contentPane.add(lbl_Logo);
 		
 		JButton btn_Carrito = new JButton("A\u00F1adir al carrito");
-		btn_Carrito.setBackground(new Color(255, 192, 203));
+		btn_Carrito.setBackground(new Color(224, 255, 255));
 		btn_Carrito.setForeground(new Color(0, 0, 0));
 		btn_Carrito.setFont(new Font("Times New Roman", Font.BOLD, 18));
 		btn_Carrito.setBounds(633, 306, 207, 43);

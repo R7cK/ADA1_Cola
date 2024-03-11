@@ -17,10 +17,11 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-
 public class GUI_Clientes extends JFrame {
 
+
 	private static final long serialVersionUID = 1L;
+
     private JPanel contentPane;
     private JLabel lbl_Logo;
     private int i = 0;
@@ -74,8 +75,9 @@ public class GUI_Clientes extends JFrame {
         btnPreordena.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	 int Ticket = ticket;
+            	 try {
                  String Nombre = JOptionPane.showInputDialog("Ingresa el nombre del responsable");
-                 int Cantidad = Integer.parseInt(JOptionPane.showInputDialog("�Cu�ntas copias quieres apartar?"));
+                 int Cantidad = Integer.parseInt(JOptionPane.showInputDialog("Escriba las unidades a comprar"));
 
                  if (Cantidad > disponible) {
                      JOptionPane.showMessageDialog(null, "No hay suficientes unidades disponibles.");
@@ -88,6 +90,9 @@ public class GUI_Clientes extends JFrame {
                      disponible -= Cantidad;
                      JOptionPane.showMessageDialog(null, "Su producto ha sido apartado");
                  }
+            	 }catch (Exception error) {
+            		 JOptionPane.showMessageDialog(null, "Inserte los datos correctamente");
+            	 }
             }
         });
         btnPreordena.setBounds(20, 440, 275, 43);
@@ -112,6 +117,7 @@ public class GUI_Clientes extends JFrame {
         btnConseguir.setFont(new Font("Times New Roman", Font.BOLD, 18));
         btnConseguir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	try {
             	int Buscar = Integer.parseInt(JOptionPane.showInputDialog("Dame el numero de ticker"));
 				Datos_Juego resultado = buscarTicket(cola, Buscar);
 		        if (resultado != null) {
@@ -119,6 +125,9 @@ public class GUI_Clientes extends JFrame {
 		        } else {
 		            JOptionPane.showMessageDialog(null, "Ticket no encontrado.");
 		        }
+				} catch (NumberFormatException errornumeros) {
+					JOptionPane.showMessageDialog(null, "Inserte un número de ticket válido");
+				}
 		    }
 
 		    public static Datos_Juego buscarTicket(Queue<Datos_Juego> cola, int Buscar) {
@@ -148,7 +157,30 @@ public class GUI_Clientes extends JFrame {
         lbl_Logo.setBounds(633, 79, 207, 145);
         contentPane.add(lbl_Logo);
 
-        JButton btn_Carrito = new JButton("A�adir al carrito");
+        JButton btn_Carrito = new JButton("Agregar al carrito");
+        btn_Carrito.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		 int Ticket = ticket;
+            	 try {
+                 String Nombre = JOptionPane.showInputDialog("Ingresa el nombre del responsable");
+                 int Cantidad = Integer.parseInt(JOptionPane.showInputDialog("Escriba las unidades a comprar"));
+
+                 if (Cantidad > disponible) {
+                     JOptionPane.showMessageDialog(null, "No hay suficientes unidades disponibles.");
+                 } else if(Cantidad <= disponible){
+                     juego = new Datos_Juego(Ticket, Nombre, Cantidad);
+                     cola.offer(juego);
+                     admin.actualizarTabla(cola);
+                     ticket++;
+                     vendido += Cantidad;
+                     disponible -= Cantidad;
+                     JOptionPane.showMessageDialog(null, "Su producto ha sido apartado");
+                 }
+            	 }catch (Exception error) {
+            		 JOptionPane.showMessageDialog(null, "Inserte los datos correctamente");
+            	 }
+        	}
+        });
         btn_Carrito.setBackground(new Color(255, 192, 203));
         btn_Carrito.setForeground(new Color(0, 0, 0));
         btn_Carrito.setFont(new Font("Times New Roman", Font.BOLD, 18));
@@ -196,7 +228,7 @@ public class GUI_Clientes extends JFrame {
         botonGUI_Administrador.setBounds(671, 439, 169, 23);
         contentPane.add(botonGUI_Administrador);
 
-        JLabel lblNewLabel = new JLabel("<html> La famosa saga de videojuego \"Grand Theft Auto\" regresa con Lucia y Jason. Una pareja que viv�a tranquilamente la Ciudad de Vice City. Pero por diversas circunstancias se ven envueltos en los problemas relacionados a la ciudad. A tal punto que sus vidas corren peligro y deber�n cuidarse las espaldas hasta encontrar una soluci�n. <br> Re�ne lo necesario y asegurate de vivir un nuevo viaje con rostros del pasado tratando de apoyar a nuestros protagonistas.");
+        JLabel lblNewLabel = new JLabel("<html> La famosa saga de videojuego \"Grand Theft Auto\" regresa con Lucia y Jason. Una pareja que vivia tranquilamente la Ciudad de Vice City. Pero por diversas circunstancias se ven envueltos en los problemas relacionados a la ciudad. A tal punto que sus vidas corren peligro y deberan cuidarse las espaldas hasta encontrar una solucion. <br> Reune lo necesario y asegurate de vivir un nuevo viaje con rostros del pasado tratando de apoyar a nuestros protagonistas.");
         lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 12));
         lblNewLabel.setForeground(new Color(255, 255, 255));
         lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
@@ -221,8 +253,6 @@ public class GUI_Clientes extends JFrame {
         contentPane.add(lblFondoGUI);
         
     }
-
-    
     public void actualizarcantidad(int cantidad) {
         disponible += cantidad;
     }

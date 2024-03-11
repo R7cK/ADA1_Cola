@@ -77,9 +77,13 @@ public class GUI_Administrador extends JFrame {
         btnAadirCantidades.setBounds(551, 454, 268, 43); 
         btnAadirCantidades.addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) {
-                int AddCant = Integer.parseInt(JOptionPane.showInputDialog("�Cu�ntas cantidades deseas a�adir?")); // Solicitar la cantidad a a�adir
+            	try {
+                int AddCant = Integer.parseInt(JOptionPane.showInputDialog("Escriba la cantidad para agregar")); // Solicitar la cantidad a a�adir
                 clientesGUI.actualizarcantidad(AddCant); // Llamar al m�todo en la interfaz de clientes para a�adir cantidades
                 actualizarDisponible(AddCant); // Actualizar la cantidad disponible en la interfaz de administrador
+            	} catch (Exception errorDatos) {
+            		JOptionPane.showMessageDialog(null, "Por favor inserte datos validos");
+            	}
             }
         });
         contentPane.add(btnAadirCantidades);

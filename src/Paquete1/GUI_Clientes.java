@@ -75,6 +75,7 @@ public class GUI_Clientes extends JFrame {
         btnPreordena.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	 int Ticket = ticket;
+            	 try {
                  String Nombre = JOptionPane.showInputDialog("Ingresa el nombre del responsable");
                  int Cantidad = Integer.parseInt(JOptionPane.showInputDialog("Escriba las unidades a comprar"));
 
@@ -89,6 +90,9 @@ public class GUI_Clientes extends JFrame {
                      disponible -= Cantidad;
                      JOptionPane.showMessageDialog(null, "Su producto ha sido apartado");
                  }
+            	 }catch (Exception error) {
+            		 JOptionPane.showMessageDialog(null, "Inserte los datos correctamente");
+            	 }
             }
         });
         btnPreordena.setBounds(20, 440, 275, 43);
@@ -113,6 +117,7 @@ public class GUI_Clientes extends JFrame {
         btnConseguir.setFont(new Font("Times New Roman", Font.BOLD, 18));
         btnConseguir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	try {
             	int Buscar = Integer.parseInt(JOptionPane.showInputDialog("Dame el numero de ticker"));
 				Datos_Juego resultado = buscarTicket(cola, Buscar);
 		        if (resultado != null) {
@@ -120,6 +125,9 @@ public class GUI_Clientes extends JFrame {
 		        } else {
 		            JOptionPane.showMessageDialog(null, "Ticket no encontrado.");
 		        }
+				} catch (NumberFormatException errornumeros) {
+					JOptionPane.showMessageDialog(null, "Inserte un número de ticket válido");
+				}
 		    }
 
 		    public static Datos_Juego buscarTicket(Queue<Datos_Juego> cola, int Buscar) {
@@ -150,6 +158,29 @@ public class GUI_Clientes extends JFrame {
         contentPane.add(lbl_Logo);
 
         JButton btn_Carrito = new JButton("Agregar al carrito");
+        btn_Carrito.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		 int Ticket = ticket;
+            	 try {
+                 String Nombre = JOptionPane.showInputDialog("Ingresa el nombre del responsable");
+                 int Cantidad = Integer.parseInt(JOptionPane.showInputDialog("Escriba las unidades a comprar"));
+
+                 if (Cantidad > disponible) {
+                     JOptionPane.showMessageDialog(null, "No hay suficientes unidades disponibles.");
+                 } else if(Cantidad <= disponible){
+                     juego = new Datos_Juego(Ticket, Nombre, Cantidad);
+                     cola.offer(juego);
+                     admin.actualizarTabla(cola);
+                     ticket++;
+                     vendido += Cantidad;
+                     disponible -= Cantidad;
+                     JOptionPane.showMessageDialog(null, "Su producto ha sido apartado");
+                 }
+            	 }catch (Exception error) {
+            		 JOptionPane.showMessageDialog(null, "Inserte los datos correctamente");
+            	 }
+        	}
+        });
         btn_Carrito.setBackground(new Color(255, 192, 203));
         btn_Carrito.setForeground(new Color(0, 0, 0));
         btn_Carrito.setFont(new Font("Times New Roman", Font.BOLD, 18));
